@@ -20,6 +20,12 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # ──────────────────────────────────────────────
 find_package(Boost CONFIG REQUIRED)
 find_package(nlohmann_json CONFIG REQUIRED)
+find_package(OpenSSL REQUIRED)
+find_package(ZLIB REQUIRED)
+find_package(unofficial-sqlite3 CONFIG QUIET)
+if(NOT unofficial-sqlite3_FOUND)
+    find_package(SQLite3 REQUIRED)
+endif()
 
 # ──────────────────────────────────────────────
 # Library Target
@@ -27,6 +33,7 @@ find_package(nlohmann_json CONFIG REQUIRED)
 add_library(nodepp
     src/http.cpp
     src/graphql.cpp
+    src/database.cpp
 )
 
 target_include_directories(nodepp PUBLIC
@@ -37,7 +44,16 @@ target_include_directories(nodepp PUBLIC
 target_link_libraries(nodepp PUBLIC
     Boost::headers
     nlohmann_json::nlohmann_json
+    OpenSSL::SSL
+    OpenSSL::Crypto
+    ZLIB::ZLIB
 )
+
+if(unofficial-sqlite3_FOUND)
+    target_link_libraries(nodepp PUBLIC unofficial::sqlite3::sqlite3)
+else()
+    target_link_libraries(nodepp PUBLIC SQLite::SQLite3)
+endif()
 
 target_compile_features(nodepp PUBLIC cxx_std_20)
 

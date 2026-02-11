@@ -8,6 +8,9 @@
     "boost-beast",
     "boost-asio",
     "nlohmann-json",
+    "openssl",
+    "zlib",
+    "sqlite3",
     {
       "name": "gtest",
       "host": true
