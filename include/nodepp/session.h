@@ -34,10 +34,10 @@ public:
     JsonValue get(const std::string& sid) override {
         std::lock_guard<std::mutex> lock(mutex_);
         auto it = store_.find(sid);
-        if (it == store_.end()) return JsonValue();
+        if (it == store_.end()) return JsonValue(nlohmann::json(nullptr));
         if (isExpired(it->second)) {
             store_.erase(it);
-            return JsonValue();
+            return JsonValue(nlohmann::json(nullptr));
         }
         return it->second.data;
     }
