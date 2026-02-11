@@ -4,17 +4,65 @@
 
 find_package(GTest CONFIG REQUIRED)
 
-# ── JSON Serialization Tests ──
-add_executable(test_json test_json.cpp)
-target_link_libraries(test_json PRIVATE nodepp GTest::gtest GTest::gtest_main)
-add_test(NAME test_json COMMAND test_json)
+# Helper: add a test with common settings
+function(nodepp_add_test TEST_NAME)
+    add_executable(${TEST_NAME} ${TEST_NAME}.cpp)
+    target_link_libraries(${TEST_NAME} PRIVATE nodepp GTest::gtest GTest::gtest_main)
+    add_test(NAME ${TEST_NAME} COMMAND ${TEST_NAME})
+endfunction()
 
-# ── HTTP Server Tests (unit tests, no network) ──
-add_executable(test_http test_http.cpp)
-target_link_libraries(test_http PRIVATE nodepp GTest::gtest GTest::gtest_main)
-add_test(NAME test_http COMMAND test_http)
+# ── Core Tests ──
+nodepp_add_test(test_json)
+nodepp_add_test(test_http)
+nodepp_add_test(test_graphql)
 
-# ── GraphQL Tests ──
-add_executable(test_graphql test_graphql.cpp)
-target_link_libraries(test_graphql PRIVATE nodepp GTest::gtest GTest::gtest_main)
-add_test(NAME test_graphql COMMAND test_graphql)
+# ── File Serving & Download ──
+nodepp_add_test(test_sendfile)
+
+# ── Multipart Parser ──
+nodepp_add_test(test_multipart)
+
+# ── Crypto ──
+nodepp_add_test(test_crypto)
+
+# ── JWT ──
+nodepp_add_test(test_jwt)
+
+# ── Session Management ──
+nodepp_add_test(test_session)
+
+# ── WebSocket ──
+nodepp_add_test(test_websocket)
+
+# ── Server-Sent Events ──
+nodepp_add_test(test_sse)
+
+# ── Compression ──
+nodepp_add_test(test_compress)
+
+# ── Validation ──
+nodepp_add_test(test_validator)
+
+# ── Template Engine ──
+nodepp_add_test(test_template)
+
+# ── Cache ──
+nodepp_add_test(test_cache)
+
+# ── Scheduler ──
+nodepp_add_test(test_scheduler)
+
+# ── Observability ──
+nodepp_add_test(test_observability)
+
+# ── Database ──
+nodepp_add_test(test_database)
+
+# ── Testing Utilities ──
+nodepp_add_test(test_testing)
+
+# ── OpenAPI ──
+nodepp_add_test(test_openapi)
+
+# ── Performance ──
+nodepp_add_test(test_perf)
