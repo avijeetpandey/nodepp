@@ -11,6 +11,7 @@
 #include <sstream>
 #include <random>
 #include <iomanip>
+#include <iostream>
 #include <unordered_map>
 
 namespace nodepp::observability {
