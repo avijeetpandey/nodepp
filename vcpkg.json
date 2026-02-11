@@ -1,0 +1,16 @@
+{
+  "name": "nodepp",
+  "version": "0.1.0",
+  "description": "A high-performance C++ web framework with Node.js/Express-like API",
+  "homepage": "https://github.com/avijeetpandey/nodepp",
+  "license": "MIT",
+  "dependencies": [
+    "boost-beast",
+    "boost-asio",
+    "nlohmann-json",
+    {
+      "name": "gtest",
+      "host": true
+    }
+  ]
+}

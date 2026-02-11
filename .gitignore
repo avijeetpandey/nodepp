@@ -1,0 +1,24 @@
+# Build
+build/
+cmake-build-*/
+out/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# vcpkg
+vcpkg_installed/
+
+# Compiled objects
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dylib
+*.dll
